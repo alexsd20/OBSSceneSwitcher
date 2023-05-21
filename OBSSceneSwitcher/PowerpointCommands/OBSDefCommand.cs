@@ -24,6 +24,7 @@ internal sealed class OBSDefCommand : IPowerPointCommand
             return;
         }
 
+        scene = scene.Trim();
         _logger?.LogDebug("Set default scene to {scene}", scene);
         _obsConnection.SetDefaultScene(scene);
     }

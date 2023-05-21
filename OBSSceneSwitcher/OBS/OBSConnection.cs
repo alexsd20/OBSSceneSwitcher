@@ -178,7 +178,7 @@ internal sealed class OBSConnection : IOBSConnection, IDisposable, IOBSState
             PopulateScenes();
         }
 
-        if (!scenes.TryGetValue(scene, out var list))
+        if (!scenes.TryGetValue(scene.Trim(), out var list))
         {
             return null;
         }

@@ -13,11 +13,9 @@ internal class Program
 {
     private static async Task Main(string[] args)
     {
-        Console.WriteLine("The OBS scene switcher");
+        Console.WriteLine("The OBS scene switcher (C) 2023");
 
         using IHost host = CreateHostBuilder(args).Build();
-        //using IServiceScope scope = host.Services.CreateScope();
-        //IServiceProvider services = scope.ServiceProvider;
 
         await host.StartAsync();
         await host.WaitForShutdownAsync();
@@ -31,7 +29,7 @@ internal class Program
                 services.AddHostedService<OBSConnector>();
 
                 services.AddSingleton<IPowerPointCommandsProvider, OBSPowerPointCommandsProvider>();
-                //services.AddSingleton<IOBSConnection, DummyOBSConnection>();
+
                 services.AddSingleton<OBSConnection>();
                 services.AddSingleton<IOBSConnection>(x => x.GetRequiredService<OBSConnection>());
                 services.AddSingleton<IOBSState>(x => x.GetRequiredService<OBSConnection>());
@@ -68,6 +66,6 @@ internal class Program
                 options.TimestampFormat = "[HH:mm:ss] ";
             });
 
-            options.SetMinimumLevel(LogLevel.Trace);
+            options.SetMinimumLevel(LogLevel.Information);
         });
 }
